@@ -1,4 +1,6 @@
 
 chromadb 
-mistral.client
+mistralai
 vosk
+python-dotenv 
+pydub

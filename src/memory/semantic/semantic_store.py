@@ -7,7 +7,7 @@ collection = client.get_or_create_collection("facts")
 
 SIMILARITY_THRESHOLD = 0.15
 
-def add_or_update_fact(query: str) -> str: 
+def add_or_update_fact(query: str, fact_text, fact_id, confidence, source_meeting_id) -> str: 
     """should store, store"""
 
     embedding = embed_text(query)
@@ -22,7 +22,7 @@ def add_or_update_fact(query: str) -> str:
     
     similarity = 1 - results["distances"][0][0]
 
-    if (similarity < SIMILARITY_THRESHOLD)
+    if (similarity < SIMILARITY_THRESHOLD):
     old_id = results["ids"][0][0]
     old_meta = collection.get(ids=[old_id])["metadatas"][0]
     old_meta["superseded"] = True
@@ -34,11 +34,11 @@ def add_or_update_fact(query: str) -> str:
     documents=[fact_text],
     ids=[fact_id],
     embeddings=[embedding]
-    metadatas=[
+    metadatas=[{
         "source_meeting_id": source_meeting_id,
         "confidence": confidence,
         "superseded": False
-    ])
+    }])
 
     return fact_id
 

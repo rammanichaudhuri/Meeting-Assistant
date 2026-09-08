@@ -1,10 +1,12 @@
 import os
+import json
 from mistralai.client import Mistral
 
 from tools.tool_registry import tools
 from tools.calendar_tool import create_calendar_event
 from tools.task_tool import create_task
 from overall.guardrails import end_guardrails
+
 
 # Initialize the client and model
 api_key = os.environ["MISTRAL_API_KEY"]
@@ -16,10 +18,12 @@ names_to_functions = {
     'create_task': create_task,
 }
 
-def loop_function(max_iterations=6):
+iterations = 0
+messages = []
 
-# Chat loop
-while True:
+def loop_function(max_iterations=6):
+    # Chat loop
+    while True:
     iterations += 1
 
     # The user query, example: "What's the status of my transaction T1001? After receiving the answer, provide the current status of T1001. Afte that, look for the next one between T1002 if previous status was 'Paid' and T1003 if previous status was 'Unpaid'."
@@ -62,7 +66,7 @@ while True:
             messages.append({
                 "role":"tool",
                 "name":function_name,
-                "content":function_result,
+                "content":json.dumps(function_result),
                 "tool_call_id":tool_call.id
             })
 
@@ -75,5 +79,10 @@ while True:
         # Add the new response message to the messages list
         messages.append(response.choices[0].message)
 
+        iterations += 1
+
     # Print the final answer
     return messages
+
+if __name__ == "__main__":
+    loop_function()

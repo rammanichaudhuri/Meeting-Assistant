@@ -15,7 +15,7 @@ tools = [{
                     },
                     "attendees": {
                         "type": "array",
-                        "items": { "type": "string }
+                        "items": { "type": "string" }
                     }
                 },
                 "required": ["title", "date", "attendees"]

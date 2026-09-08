@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS meetings (
+SCHEMA = """CREATE TABLE IF NOT EXISTS meetings (
   meeting_id   INTEGER PRIMARY KEY,
   title    TEXT,
   participants    TEXT,  
@@ -16,6 +16,6 @@ CREATE TABLE IF NOT EXISTS action_items (
   due_date    TEXT,
   status TEXT,
   confidence REAL,
-  needs_review INTEGER
+  needs_review INTEGER,
   tool_call_status TEXT
-);
+);"""
