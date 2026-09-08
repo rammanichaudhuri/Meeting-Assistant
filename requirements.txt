@@ -1,0 +1,4 @@
+
+chromadb 
+mistral.client
+vosk
