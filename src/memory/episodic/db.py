@@ -10,7 +10,7 @@ SCHEMA = """CREATE TABLE IF NOT EXISTS meetings (
 
 CREATE TABLE IF NOT EXISTS action_items (
   item_id   INTEGER PRIMARY KEY,
-  meeting_id INTEGER REFERENCES meetings(meeting_id)
+  meeting_id INTEGER REFERENCES meetings(meeting_id),
   text    TEXT,
   owner    TEXT,
   due_date    TEXT,

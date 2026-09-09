@@ -22,7 +22,7 @@ def add_or_update_fact(query: str, fact_text, fact_id, confidence, source_meetin
     
     similarity = 1 - results["distances"][0][0]
 
-    if (similarity < SIMILARITY_THRESHOLD):
+    if (similarity < 1 - SIMILARITY_THRESHOLD):
     old_id = results["ids"][0][0]
     old_meta = collection.get(ids=[old_id])["metadatas"][0]
     old_meta["superseded"] = True
